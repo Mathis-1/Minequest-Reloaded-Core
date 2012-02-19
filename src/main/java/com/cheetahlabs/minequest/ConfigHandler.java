@@ -1,17 +1,19 @@
-package org.monksanctum.MineQuest;
+package com.cheetahlabs.minequest;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.monksanctum.MineQuest.Configuration.AbilityConfigManager;
-import org.monksanctum.MineQuest.Configuration.CombatClassConfig;
-import org.monksanctum.MineQuest.Configuration.HealItemConfig;
-import org.monksanctum.MineQuest.Configuration.ResourceClassConfig;
-import org.monksanctum.MineQuest.Configuration.SkillClassConfig;
-import org.monksanctum.MineQuest.Event.NoMobs;
-import org.monksanctum.MineQuest.Event.NormalEvent;
-import org.monksanctum.MineQuest.Event.Absolute.HealEvent;
-import org.monksanctum.MineQuest.Event.Absolute.ManaEvent;
+import com.cheetahlabs.MineQuest.Configuration.AbilityConfigManager;
+import com.cheetahlabs.MineQuest.Configuration.CombatClassConfig;
+import com.cheetahlabs.MineQuest.Configuration.HealItemConfig;
+import com.cheetahlabs.MineQuest.Configuration.ResourceClassConfig;
+import com.cheetahlabs.MineQuest.Configuration.SkillClassConfig;
+import com.cheetahlabs.MineQuest.Event.NoMobs;
+import com.cheetahlabs.MineQuest.Event.NormalEvent;
+import com.cheetahlabs.MineQuest.Event.Absolute.HealEvent;
+import com.cheetahlabs.MineQuest.Event.Absolute.ManaEvent;
+
+import com.cheetahlabs.minequest.sqlcore.MysqlInterface;
 
 public class ConfigHandler {
 	public AbilityConfigManager ability_config;

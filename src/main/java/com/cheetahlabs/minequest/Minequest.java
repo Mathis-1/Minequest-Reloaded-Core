@@ -203,6 +203,7 @@ public class Minequest extends JavaPlugin {
 		}
 	}		
 	}
+//TODO: Finish onDisable
 	@Override
 	public void onDisable() {
 		PluginDescriptionFile pdfFile = this.getDescription();

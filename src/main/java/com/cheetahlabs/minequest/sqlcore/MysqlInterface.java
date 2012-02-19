@@ -16,7 +16,7 @@
  * along with this program; if not, write to the Free Software
  * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301, USA.
  */
-package org.monksanctum.MineQuest;
+package com.cheetahlabs.minequest.sqlcore;
 
 
 import java.sql.Connection;
@@ -25,8 +25,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-import org.monksanctum.MineQuest.Ability.AbilityBinder;
-import org.monksanctum.MineQuest.Event.SQLEvent;
+import com.cheetahlabs.minequest.Minequest;
+import com.cheetahlabs.MineQuest.Event.SQLEvent;
 
 /**
  * MysqlInterface is a class that wraps the JDBC
@@ -59,7 +59,7 @@ public class MysqlInterface {
 			try {
 				Class.forName("com.mysql.jdbc.Driver", true, (new AbilityBinder()).getClass().getClassLoader());
 			} catch (ClassNotFoundException e) {
-				MineQuest.log("You appear to be missing MySQL JDBC");
+				Minequest.log("You appear to be missing MySQL JDBC");
 				con = null;
 				stmt = null;
 				throw new Exception();
@@ -69,7 +69,7 @@ public class MysqlInterface {
 			try {
 				Class.forName("org.sqlite.JDBC", true, (new AbilityBinder()).getClass().getClassLoader());
 			} catch (ClassNotFoundException e) {
-				MineQuest.log("You appear to be missing SQLite JDBC");
+				Minequest.log("You appear to be missing SQLite JDBC");
 				con = null;
 				stmt = null;
 				throw new Exception();
@@ -98,7 +98,7 @@ public class MysqlInterface {
 				con = (Connection) DriverManager.getConnection(url);
 			}
 		} catch (SQLException e) {
-			MineQuest.log("[ERROR] Unable to Connect to MySQL Database");
+			Minequest.log("[ERROR] Unable to Connect to MySQL Database");
 			if (!silent) {
 				e.printStackTrace();
 			}
@@ -108,7 +108,7 @@ public class MysqlInterface {
 		 try {
 			stmt = (Statement) con.createStatement();
 		} catch (SQLException e) {
-			MineQuest.log("[ERROR] Failed to setup MySQL Statement");
+			Minequest.log("[ERROR] Failed to setup MySQL Statement");
 			if (!silent) {
 				e.printStackTrace();
 			}
@@ -124,14 +124,14 @@ public class MysqlInterface {
 	 */
 	synchronized public ResultSet query(String the_query) {
 		if (stmt == null) {
-			MineQuest.log("You are not connected to a database (try configuring MineQuest/main.properties)");
+			Minequest.log("You are not connected to a database (try configuring MineQuest/main.properties)");
 			return null;
 		}
 		if (!silent) {
 			if (real) {
-				MineQuest.log("(MySQL) " + the_query);
+				Minequest.log("(MySQL) " + the_query);
 			} else {
-				MineQuest.log("(SQLite) " + the_query);
+				Minequest.log("(SQLite) " + the_query);
 			}
 		}
 		try {
@@ -143,11 +143,11 @@ public class MysqlInterface {
 			return last;
 		} catch (SQLException e) {
 			if (real) {
-				MineQuest.log("(MySQL) " + the_query);
+				Minequest.log("(MySQL) " + the_query);
 			} else {
-				MineQuest.log("(SQLite) " + the_query);
+				Minequest.log("(SQLite) " + the_query);
 			}
-			MineQuest.log("[ERROR] Failed to query database");
+			Minequest.log("[ERROR] Failed to query database");
 			reconnect();
 			try {
 				last = stmt.executeQuery(the_query);
@@ -171,14 +171,14 @@ public class MysqlInterface {
 	synchronized public int update(String sql) {
 		int ret;
 		if (stmt == null) {
-			MineQuest.log("You are not connected to a database (try configuring MineQuest/main.properties)");
+			Minequest.log("You are not connected to a database (try configuring MineQuest/main.properties)");
 			return 1;
 		}
 		if (!silent) {
 			if (real) {
-				MineQuest.log("(MySQL) " + sql);
+				Minequest.log("(MySQL) " + sql);
 			} else {
-				MineQuest.log("(SQLite) " + sql);
+				Minequest.log("(SQLite) " + sql);
 			}
 		}
 		try {
@@ -190,18 +190,18 @@ public class MysqlInterface {
 			return ret;
 		} catch (SQLException e) {
 			if (real) {
-				MineQuest.log("(MySQL) " + sql);
+				Minequest.log("(MySQL) " + sql);
 			} else {
-				MineQuest.log("(SQLite) " + sql);
+				Minequest.log("(SQLite) " + sql);
 			}
-			MineQuest.log("[ERROR] Failed to update database (retrying...)");
+			Minequest.log("[ERROR] Failed to update database (retrying...)");
 			reconnect();
 			try {
 				ret = stmt.executeUpdate(sql);
-				MineQuest.log("Retry Successful!!");
+				Minequest.log("Retry Successful!!");
 				return ret;
 			} catch (SQLException e1) {
-				MineQuest.log("Retry Failed!!");
+				Minequest.log("Retry Failed!!");
 				e1.printStackTrace();
 				return 1;
 			}
@@ -211,14 +211,14 @@ public class MysqlInterface {
 	synchronized public int update(String sql, boolean extra_silent) {
 		int ret;
 		if (stmt == null) {
-			MineQuest.log("You are not connected to a database (try configuring MineQuest/main.properties)");
+			Minequest.log("You are not connected to a database (try configuring MineQuest/main.properties)");
 			return 1;
 		}
 		if (!silent) {
 			if (real) {
-				MineQuest.log("(MySQL) " + sql);
+				Minequest.log("(MySQL) " + sql);
 			} else {
-				MineQuest.log("(SQLite) " + sql);
+				Minequest.log("(SQLite) " + sql);
 			}
 		}
 		try {
@@ -231,19 +231,19 @@ public class MysqlInterface {
 		} catch (SQLException e) {
 			if (!extra_silent) {
 				if (real) {
-					MineQuest.log("(MySQL) " + sql);
+					Minequest.log("(MySQL) " + sql);
 				} else {
-					MineQuest.log("(SQLite) " + sql);
+					Minequest.log("(SQLite) " + sql);
 				}
-				MineQuest.log("[ERROR] Failed to update database (retrying...)");
+				Minequest.log("[ERROR] Failed to update database (retrying...)");
 			}
 			reconnect();
 			try {
 				ret = stmt.executeUpdate(sql);
-				MineQuest.log("Retry Successful!!");
+				Minequest.log("Retry Successful!!");
 				return ret;
 			} catch (SQLException e1) {
-				MineQuest.log("Retry Failed!!");
+				Minequest.log("Retry Failed!!");
 				e1.printStackTrace();
 				return 1;
 			}
@@ -251,6 +251,6 @@ public class MysqlInterface {
 	}
 
 	public void aupdate(String string) {
-		MineQuest.getEventQueue().addEventAsync(new SQLEvent(10, string));
+		Minequest.getEventQueue().addEventAsync(new SQLEvent(10, string));
 	}
 }

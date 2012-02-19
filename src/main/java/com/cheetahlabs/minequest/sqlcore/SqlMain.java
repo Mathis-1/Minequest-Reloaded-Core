@@ -134,7 +134,9 @@ public class SqlMain {
 				Minequest.log("DB Upgrading failed - Aborting!!");
 				
 //TODO: Add a MQ disable here.
+				minequest.onDisable();
 				throw new Exception();
+				
 			}
 			
 			int index = 0;
