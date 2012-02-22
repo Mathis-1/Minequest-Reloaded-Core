@@ -5,11 +5,9 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChatEvent;
 
 import com.cheetahlabs.minequest.Minequest;
-import com.cheetahlabs.minequest.npcspawner.NpcMain;
 
 public class ServerChatPlayerListener implements Listener {
 	public static Minequest plugin;
-	public NpcMain spawner;
 	
 	public ServerChatPlayerListener(Minequest instance) {
 		plugin = instance;
@@ -32,11 +30,6 @@ public class ServerChatPlayerListener implements Listener {
 					p.sendMessage("/removenpc <Name>    Deletes NPC with the given name.");
 					p.sendMessage("/npcproperty <property> <value>");
 				}
-			if (message_lower.startsWith("spawnnpc", 1)){
-				//Test spawn
-				NpcMain.spawnnpc("EchoBlarg" , p.getLocation());
-				}	
-			
 			}
 			
 		}

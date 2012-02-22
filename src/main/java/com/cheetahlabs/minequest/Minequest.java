@@ -29,7 +29,6 @@ import org.bukkit.entity.HumanEntity;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
 import org.bukkit.event.Event;
-import org.bukkit.event.Event.Priority;
 import org.bukkit.inventory.ItemStack;
 
 import org.bukkit.plugin.PluginDescriptionFile;
@@ -74,7 +73,6 @@ public class Minequest extends JavaPlugin {
 	@Override
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
-		pm.registerEvent(Event.Type.PLAYER_CHAT, this.playerListener, Event.Priority.Normal, this);		
 		version = version();
 		this.mqLogger.info("Minequest" + "version" + version + " is Enabled");
 
