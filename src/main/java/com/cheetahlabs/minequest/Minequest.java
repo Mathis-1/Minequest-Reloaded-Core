@@ -46,6 +46,7 @@ public class Minequest extends JavaPlugin {
 	
 	private String versionString;
 	public double version;
+	public String name;
 	private static Server server;
 	public final Logger mqLogger = Logger.getLogger("Minecraft");
 	public final ServerChatPlayerListener playerListener = new ServerChatPlayerListener(this);
@@ -66,21 +67,26 @@ public class Minequest extends JavaPlugin {
         version = Double.parseDouble(versionString);
 		return version;
 	}
+	public String getname(){
+		PluginDescriptionFile pdfFile = this.getDescription();
+		name = pdfFile.getName();
+		return name; 
+	}
 	
-	//Starts MineQuest
+	//Starts MineQuest and loads all npcs. 
 	@Override
 	public void onEnable() {
 		PluginManager pm = getServer().getPluginManager();
 		version = version();
-		this.mqLogger.info("Minequest" + "version" + version + " is Enabled");
+		this.mqLogger.info(name + "version" + version + " is Enabled");
+		
+		
 	}
 	
-
-//TODO: Finish onDisable
+	//Disables MQ and removes all npcs and saves them one last time in the sql. 
 	@Override
 	public void onDisable() {
-		PluginDescriptionFile pdfFile = this.getDescription();
-		this.mqLogger.info(pdfFile.getName() + " is now disabled.");
+		this.mqLogger.info(name + " is now disabled.");
 		
 	}
 
